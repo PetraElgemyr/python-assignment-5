@@ -8,13 +8,10 @@ Planering av steg
 2. Ta emot input från användaren. 
 3. Kolla om input är ett heltal och större än 1. Om inte, be användaren att skriva in ett nytt tal.
 4. Om input är > 1, spara i variabel. Tom lista för att samla ihop alla primtal.
-5. Loopa igenom alla tal från 1 till inputnummer. I varje iteration, anropa funktion som kollar om talet är ett primtal.
-6. Primtalsfunktion tar emot ett tal (börjar på tal 1 och fortsätter med 2, 3, 4 osv upp till inputtalet). Detta blir slutet på rangen i for-loopen.
-7. I primtalsfunktion loopar vi igenom alla tal från 2 till talet som skickas in som parameter. Varje iteration kollar om talet är delbart med i. 
-   Om talet är delbart med något tal upp till inputtalet så är det ej ett primtal. Returnerar inget tal.
-   Om talet Inte är delbart med något av talen från 2 till inputtalet, så är det ett primtal och det returneras.
-8. Talen som returneras till primtalsfunktionens anrop sparas i en lista för primtal. 
-9. Skriv ut alla tal i listan för primtal.
+5. Loppa igenom talen från 2 till inputtalet, anropa primtalsfunktion som kollar om talet är ett primtal 
+   genom att kolla kvadratroten och loopa upp tills den.
+6. Om talet är ett primtal, returnera True och lägg till i primtalslistan.
+7. Skriv ut alla tal i listan för primtal.
 
 
 Felhantering
@@ -27,11 +24,13 @@ inte vara möjligt för att förenkla för användaren. Istället för att hante
 
 """
 
+from math import sqrt
+
 
 def main():
-
     numberFromInput = getInput()
     primes = []
+
     for i in range(2, numberFromInput + 1):
         if isPrimeNumber(i):
             primes.append(i)
@@ -68,14 +67,17 @@ def getInput():
 
 
 def isPrimeNumber(number):
-    # Loopar från 2 till angivet tal. i startar på 2 eftersom alla tal är delbara med 1 och ökar med 1 för varje iteration.
-    for i in range(2, number):
-        # Om talet är delbart med i (som är 2, 3, 4, 5, 6 osv upp till angivet tal) så är det inte ett primtal och returnerar inget tal.
-        if (number % i) == 0:
-            return None
-    # Om talet inte är delbart med något av talen från 2 till angivet tal, så är det ett primtal och det returneras.
-    else:
-        return number
+    if number <= 1:
+        return False
+    if number <= 3:
+        return True
+    if number % 2 == 0 or number % 3 == 0:
+        return False
+    limit = int(sqrt(number)) + 1
+    for i in range(5, limit, 6):
+        if number % i == 0 or number % (i + 2) == 0:
+            return False
+    return True
 
 
 main()
