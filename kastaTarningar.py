@@ -17,12 +17,14 @@ Planering
 from random import randint
 
 
+# Genererar ett slumpmässigt tal mellan 1 till 6 efter att användaren klickat på enter
 def getRadnomNumber(diceNumber):
     input(f"Kasta tärning {diceNumber} genom att klicka på enter!")
     dice = randint(1, 6)
     return dice
 
 
+# Funktion som fortsätter att kasta tärningarna och skriver ut resultaten
 def throwDices():
 
     firstDice = None
@@ -37,6 +39,7 @@ def throwDices():
     print(f"Tärning 1: {firstDice} \nTärning 2: {secondDice}")
 
 
+# Mainfunktion som startat programmet. While-loop som frågar om användaren vill avsluta programmet.
 def main():
     stopExecution = False
 
